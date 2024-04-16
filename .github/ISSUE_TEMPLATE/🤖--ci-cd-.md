@@ -1,8 +1,8 @@
 ---
-name: ":robot: [ci/cd]"
+name: "\U0001F916 [CI/CD]"
 about: CI/CD 관련 설정, 개선, 문제 해결을 위한 이슈 템플릿입니다.
-title: ":robot: [ci/cd]"
-labels: ''
+title: "\U0001F916 [CI/CD]"
+labels: ":robot: ci"
 assignees: ''
 
 ---

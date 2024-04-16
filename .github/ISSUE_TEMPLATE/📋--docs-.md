@@ -1,7 +1,7 @@
 ---
-name: "\U0001F4CB [docs]"
+name: "\U0001F4CB [Docs]"
 about: API 명세서 등 문서 관련 템플릿입니다.
-title: "\U0001F4CB [docs]"
+title: "\U0001F4CB [Docs]"
 labels: ":memo: docs"
 assignees: ''
 

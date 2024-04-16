@@ -1,7 +1,7 @@
 ---
-name: "\U0001F528[refactor]"
+name: "\U0001F528[Refactor]"
 about: 리팩토링용 탬플릿 입니다.
-title: "\U0001F528[refactor]"
+title: "\U0001F528[Refactor]"
 labels: ":recycle: refactor"
 assignees: ''
 
