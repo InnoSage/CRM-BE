@@ -56,6 +56,37 @@ feature/기능요약 형식. ex) feature/login
 ```
 
 </aside>
+## 디렉토리 구조
+
+### ✅ 도메인형 디렉터리 구조
+```
+com
+ ㄴ innosage
+     ㄴ crm
+         ㄴ domain
+         |   ㄴ user
+         |   |   ㄴ controller
+         |   |   ㄴ dto
+         |   |   ㄴ entity
+         |   |   ㄴ service
+         |   |   ㄴ repository
+         |   |   ㄴ exception
+         |   ㄴ sheet
+         |   |   ㄴ controller
+         |   |   ㄴ dto
+         |   |   ㄴ entity
+         |   |   ㄴ service
+         |   |   ㄴ repository
+         |   |   ㄴ exception
+         |   ...
+         ㄴ global
+             ㄴ auth
+             ㄴ common
+             ㄴ config
+             ㄴ exception
+             ㄴ infra
+             ㄴ util
+```
 
 ## ☑️ 코드 컨벤션
 
