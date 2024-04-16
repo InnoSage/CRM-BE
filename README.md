@@ -56,6 +56,7 @@ feature/기능요약 형식. ex) feature/login
 ```
 
 </aside>
+
 ## 디렉토리 구조
 
 ### ✅ 도메인형 디렉터리 구조
