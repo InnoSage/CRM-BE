@@ -1,5 +1,15 @@
 # CRM-BE
 
+## 브랜치 네이밍
+
+1) main branch, develop branch
+
+main와 develop 브랜치는 본래 이름 그대로 사용
+
+2) feature branch
+
+feature/기능요약 형식. ex) feature/login
+
 ## 커밋 메시지 컨벤션
 
 <aside>
