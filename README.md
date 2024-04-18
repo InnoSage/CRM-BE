@@ -22,7 +22,7 @@ feature/기능요약 형식. ex) feature/login
     
     | 커밋 유형 | 의미 |
     | --- | --- |
-    | Feat | 새로운 기능 추가 |
+    | Feature | 새로운 기능 추가 |
     | Fix | 버그 수정 |
     | Docs | 문서 수정 |
     | Style | 코드 formatting, 세미콜론 누락, 코드 자체의 변경이 없는 경우 |
