@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/crm;
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      # 다시  생성할 때 drop-and-create
+      ddl-auto: create
+    properties:
+      hibernate:
+        #        show_sql: true
+        format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+jwt:
+  header: Authorization
+  #HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 한다.
+  #echo 'silvernine-tech-spring-boot-jwt-tutorial-secret-silvernine-tech-spring-boot-jwt-tutorial-secret' 이라는 문자열을 base64로 인코딩
+  secret:
+    key: 1bHO0iXdu2GfRE1Lj0GMSTrcv5U2Xqy0+VDViviWOh4QS9t1q69NOWD20nZO5/o6UyKUKS7w8pkpygfN9XF1vg==
+  token-validity-in-seconds: 86400
+
