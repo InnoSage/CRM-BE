@@ -11,6 +11,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +21,8 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -133,18 +137,18 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
         return super.handleExceptionInternal(e, body, headers, errorCode.getHttpStatus(), request);
     }
 
-//    private void getExceptionStackTrace(
-//            Exception e, @AuthenticationPrincipal User user, HttpServletRequest request) {
-//        StringWriter sw = new StringWriter();
-//        PrintWriter pw = new PrintWriter(sw);
-//
-//        pw.append("\n==========================!!!ERROR TRACE!!!==========================\n");
-//        pw.append("uri: " + request.getRequestURI() + " " + request.getMethod() + "\n");
-//        if (user != null) {
-//            pw.append("uid: " + user.getUsername() + "\n");
-//        }
-//        pw.append(e.getMessage());
-//        pw.append("\n=====================================================================");
-//        log.error(sw.toString());
-//    }
+    private void getExceptionStackTrace(
+            Exception e, @AuthenticationPrincipal User user, HttpServletRequest request) {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+
+        pw.append("\n==========================!!!ERROR TRACE!!!==========================\n");
+        pw.append("uri: " + request.getRequestURI() + " " + request.getMethod() + "\n");
+        if (user != null) {
+            pw.append("uid: " + user.getUsername() + "\n");
+        }
+        pw.append(e.getMessage());
+        pw.append("\n=====================================================================");
+        log.error(sw.toString());
+    }
 }
