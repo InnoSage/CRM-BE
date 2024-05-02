@@ -12,7 +12,7 @@ import lombok.*;
 public class Member extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
 
@@ -30,5 +30,8 @@ public class Member extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private Authority authority;
+
+    @Enumerated(EnumType.STRING)
+    private MemberStatus status;
 
 }

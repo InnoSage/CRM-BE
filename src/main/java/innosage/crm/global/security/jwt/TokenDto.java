@@ -1,4 +1,4 @@
-package innosage.crm.global.auth;
+package innosage.crm.global.security.jwt;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

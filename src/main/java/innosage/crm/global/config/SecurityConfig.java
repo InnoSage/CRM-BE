@@ -1,90 +1,104 @@
 package innosage.crm.global.config;
 
-import innosage.crm.global.auth.JwtAccessDeniedHandler;
-import innosage.crm.global.auth.JwtAuthenticationEntryPoint;
-import innosage.crm.global.auth.TokenProvider;
+import innosage.crm.global.security.jwt.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.filter.CorsFilter;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
-@EnableWebSecurity
-@Configuration
-@RequiredArgsConstructor
+import java.util.Collections;
+
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Slf4j
+@RequiredArgsConstructor
+@EnableWebSecurity(debug = true)
+@Configuration
 public class SecurityConfig {
-    private final TokenProvider tokenProvider;
-    private final CorsFilter corsFilter;
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public static BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint = new JwtAuthenticationEntryPoint();
+
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler = new JwtAccessDeniedHandler();
+
+    private final TokenProvider tokenProvider;
+
+    private final JwtAuthenticationExceptionHandler jwtAuthenticationExceptionHandler =
+            new JwtAuthenticationExceptionHandler();
+
+    private static final String[] JWT_WHITE_LIST ={
+            "/users/register","/users/login","/users/reissue"
+    };
+
+    /**
+     * 특정 경로에 대한 보안 설정을 무시하도록 설정
+     * @return WebSecurityCustomizer
+     */
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().
-                requestMatchers(new AntPathRequestMatcher("/h2-console/**"))
-                .requestMatchers(new AntPathRequestMatcher( "/favicon.ico"))
-                .requestMatchers(new AntPathRequestMatcher( "/css/**"))
-                .requestMatchers(new AntPathRequestMatcher( "/js/**"))
-                .requestMatchers(new AntPathRequestMatcher( "/img/**"))
-                .requestMatchers(new AntPathRequestMatcher( "/lib/**"));
+        return (web) ->
+                web.ignoring()
+                        .requestMatchers(
+                                "/health",
+                                "/schedule",
+                                "/v3/api-docs",
+                                "/v3/api-docs/**",
+                                "/favicon.io",
+                                "/swagger-ui/**",
+                                "/docs/**",
+                                "/h2-console/**");
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
+    public SecurityFilterChain JwtFilterChain(HttpSecurity http) throws Exception {
+        return http.cors(corsConfigurer -> corsConfigurer.configurationSource(corsConfiguration()))
+                .httpBasic(withDefaults())
+                .csrf(AbstractHttpConfigurer::disable) // 비활성화
+                .sessionManagement(
+                        manage ->
+                                manage.sessionCreationPolicy(
+                                        SessionCreationPolicy.STATELESS)) // Session 사용 안함
+                .formLogin(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(
+                        authorize -> {
+//                            authorize.requestMatchers("/swagger-ui/**").permitAll();
+                            authorize.requestMatchers("/users/**").permitAll();
+                            authorize.anyRequest().authenticated();
+                        })
+                .exceptionHandling(
+                        exceptionHandling ->
+                                exceptionHandling
+                                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                                        .accessDeniedHandler(jwtAccessDeniedHandler))
+                .addFilterBefore(
+                        new JwtFilter(tokenProvider, JWT_WHITE_LIST),
+                        UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthenticationExceptionHandler, JwtFilter.class)
+                .build();
+    }
 
-        // CSRF 설정 Disable
-        http.csrf().disable()
-
-                .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
-
-                // exception handling 할 때 우리가 만든 클래스를 추가
-                .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .accessDeniedHandler(jwtAccessDeniedHandler)
-
-                .and()
-                .headers()
-                .frameOptions()
-                .sameOrigin()
-
-                // 시큐리티는 기본적으로 세션을 사용
-                // 여기서는 세션을 사용하지 않기 때문에 세션 설정을 Stateless 로 설정
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
-                // 로그인, 회원가입 API 는 토큰이 없는 상태에서 요청이 들어오기 때문에 permitAll 설정
-                .and()
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(new MvcRequestMatcher(introspector,"/auth/**")).permitAll()
-                        .anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults())  // 나머지 API 는 전부 인증 필요
-
-
-
-
-                // JwtFilter 를 addFilterBefore 로 등록했던 JwtSecurityConfig 클래스를 적용
-                .apply(new JwtSecurityConfig(tokenProvider));
-
-        return http.build();
+    public CorsConfigurationSource corsConfiguration() {
+        return request -> {
+            org.springframework.web.cors.CorsConfiguration config =
+                    new org.springframework.web.cors.CorsConfiguration();
+            config.setAllowedHeaders(Collections.singletonList("*")); // 모든 헤더 허용
+            config.setAllowedMethods(Collections.singletonList("*")); // 모든 메소드 허용
+            config.setAllowedOriginPatterns(Collections.singletonList("*")); // 모든 Origin 허용
+            config.setAllowCredentials(true);   // 인증정보 허용
+            return config;
+        };
     }
 }

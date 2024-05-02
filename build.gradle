@@ -22,16 +22,28 @@ repositories {
 }
 
 dependencies {
+    // Spring data JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // Spring Web
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    // Validation
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // Spring Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
-
+    //Lombok
     compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'com.h2database:h2'
-    runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
+    // Spring Boot DevTools
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    // H2 Database
+    runtimeOnly 'com.h2database:h2'
+    // MySQL Database
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    // swagger
+    implementation 'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+
 
     // Spring Boot Test dependencies
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -41,6 +53,9 @@ dependencies {
     implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
+
+    // redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis:2.3.1.RELEASE'
 }
 
 tasks.named('bootBuildImage') {

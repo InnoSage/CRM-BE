@@ -1,18 +1,27 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/crm;
+    url: jdbc:h2:~/crm;
     username: sa
     password:
     driver-class-name: org.h2.Driver
-
+  h2:
+    console:
+      enabled: true  # H2 Console을 사용할지 여부 (H2 Console은 H2 Database를 UI로 제공해주는 기능)
+      path: /h2-console  # H2 Console의 Path
+  data:
+    redis:
+      host: ${REDIS_URL}
+      port: 6379
   jpa:
     hibernate:
-      # 다시  생성할 때 drop-and-create
-      ddl-auto: create
+      ddl-auto: create-drop
     properties:
       hibernate:
-        #        show_sql: true
+        #  show_sql: true
         format_sql: true
+        use_sql_comments: true # sql 과 함께 jpql 주석처리되어  콘솔창에 출력
+
+
 
 logging:
   level:
@@ -23,6 +32,8 @@ jwt:
   #HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 한다.
   #echo 'silvernine-tech-spring-boot-jwt-tutorial-secret-silvernine-tech-spring-boot-jwt-tutorial-secret' 이라는 문자열을 base64로 인코딩
   secret:
-    key: 1bHO0iXdu2GfRE1Lj0GMSTrcv5U2Xqy0+VDViviWOh4QS9t1q69NOWD20nZO5/o6UyKUKS7w8pkpygfN9XF1vg==
-  token-validity-in-seconds: 86400
+    key: ${JWT_SECRET}
+  authorities-key: authoritiesKey
+  access-token-validity-in-seconds: 30000 # 30 s
+  refresh-token-validity-in-seconds: 60000 # 1 min
 
