@@ -2,6 +2,8 @@ package innosage.crm.company.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CompanyResponseDto {
 
@@ -22,5 +24,14 @@ public class CompanyResponseDto {
 
         private Long companyId;
         private String companyName;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class getCompanyList {
+
+        private List<getCompany> companies;
     }
 }
