@@ -1,6 +1,10 @@
 package innosage.crm.sheet.dto;
 
+import innosage.crm.attribute.dto.AttributeResponseDto;
+import innosage.crm.deal.dto.DealResponseDto;
 import lombok.*;
+
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SheetResponseDto {

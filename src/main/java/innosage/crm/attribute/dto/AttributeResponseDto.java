@@ -20,6 +20,17 @@ public class AttributeResponseDto {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
+    public static class getAttribute {
+
+        private Long attributeId;
+        private String attributeName;
+        private String dataType;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class updateAttribute {
 
         private Long attributeId;
