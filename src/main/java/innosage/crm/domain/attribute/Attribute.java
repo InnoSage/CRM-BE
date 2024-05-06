@@ -21,6 +21,8 @@ public class Attribute {
 
     private String name;
 
+    private String description;
+
     @OneToOne(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true)
     private Content content;
 
