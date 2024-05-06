@@ -2,7 +2,7 @@ package innosage.crm.global.security.jwt;
 
 import innosage.crm.global.exception.auth.jwt.JwtAuthenticationException;
 import innosage.crm.global.exception.common.code.GlobalErrorCode;
-import innosage.crm.member.entity.Member;
+import innosage.crm.auth.member.entity.Member;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
