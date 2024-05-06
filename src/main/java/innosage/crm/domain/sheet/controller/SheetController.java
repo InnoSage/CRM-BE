@@ -1,7 +1,7 @@
-package innosage.crm.sheet.controller;
+package innosage.crm.domain.sheet.controller;
 
 import innosage.crm.global.common.CommonResponse;
-import innosage.crm.sheet.dto.SheetResponseDto;
+import innosage.crm.domain.sheet.dto.SheetResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

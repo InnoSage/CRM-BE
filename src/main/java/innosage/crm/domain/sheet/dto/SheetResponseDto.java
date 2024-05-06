@@ -1,4 +1,4 @@
-package innosage.crm.sheet.dto;
+package innosage.crm.domain.sheet.dto;
 
 import innosage.crm.domain.attribute.dto.AttributeResponseDto;
 import innosage.crm.domain.deal.dto.DealResponseDto;

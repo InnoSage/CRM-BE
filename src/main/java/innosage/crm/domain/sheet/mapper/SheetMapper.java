@@ -1,9 +1,9 @@
-package innosage.crm.sheet.mapper;
+package innosage.crm.domain.sheet.mapper;
 
 import innosage.crm.domain.attribute.dto.AttributeResponseDto;
 import innosage.crm.domain.deal.dto.DealResponseDto;
 import innosage.crm.domain.sheet.Sheet;
-import innosage.crm.sheet.dto.SheetResponseDto;
+import innosage.crm.domain.sheet.dto.SheetResponseDto;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
