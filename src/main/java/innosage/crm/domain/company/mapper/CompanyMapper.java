@@ -1,7 +1,7 @@
-package innosage.crm.company.mapper;
+package innosage.crm.domain.company.mapper;
 
-import innosage.crm.company.Company;
-import innosage.crm.company.dto.CompanyResponseDto;
+import innosage.crm.domain.company.Company;
+import innosage.crm.domain.company.dto.CompanyResponseDto;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;

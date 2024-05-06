@@ -1,7 +1,7 @@
-package innosage.crm.deal.controller;
+package innosage.crm.domain.deal.controller;
 
-import innosage.crm.deal.dto.DealRequestDto;
-import innosage.crm.deal.dto.DealResponseDto;
+import innosage.crm.domain.deal.dto.DealRequestDto;
+import innosage.crm.domain.deal.dto.DealResponseDto;
 import innosage.crm.global.common.CommonResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;

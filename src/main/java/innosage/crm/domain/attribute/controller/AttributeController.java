@@ -1,7 +1,7 @@
-package innosage.crm.attribute.controller;
+package innosage.crm.domain.attribute.controller;
 
-import innosage.crm.attribute.dto.AttributeRequestDto;
-import innosage.crm.attribute.dto.AttributeResponseDto;
+import innosage.crm.domain.attribute.dto.AttributeRequestDto;
+import innosage.crm.domain.attribute.dto.AttributeResponseDto;
 import innosage.crm.global.common.CommonResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;

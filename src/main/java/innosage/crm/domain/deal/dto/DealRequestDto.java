@@ -1,4 +1,4 @@
-package innosage.crm.deal.dto;
+package innosage.crm.domain.deal.dto;
 
 import lombok.Getter;
 

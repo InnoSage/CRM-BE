@@ -1,6 +1,6 @@
-package innosage.crm.deal.dto;
+package innosage.crm.domain.deal.dto;
 
-import innosage.crm.content.dto.ContentResponseDto;
+import innosage.crm.domain.attribute.content.dto.ContentResponseDto;
 import lombok.*;
 
 import java.util.List;

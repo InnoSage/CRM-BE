@@ -1,9 +1,9 @@
-package innosage.crm.content.mapper;
+package innosage.crm.domain.attribute.content.mapper;
 
-import innosage.crm.attribute.Attribute;
-import innosage.crm.content.Content;
-import innosage.crm.content.dto.ContentResponseDto;
-import innosage.crm.deal.Deal;
+import innosage.crm.domain.attribute.Attribute;
+import innosage.crm.domain.attribute.content.Content;
+import innosage.crm.domain.attribute.content.dto.ContentResponseDto;
+import innosage.crm.domain.deal.Deal;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;

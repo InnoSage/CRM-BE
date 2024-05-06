@@ -1,6 +1,6 @@
-package innosage.crm.company.controller;
+package innosage.crm.domain.company.controller;
 
-import innosage.crm.company.dto.CompanyResponseDto;
+import innosage.crm.domain.company.dto.CompanyResponseDto;
 import innosage.crm.global.common.CommonResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;

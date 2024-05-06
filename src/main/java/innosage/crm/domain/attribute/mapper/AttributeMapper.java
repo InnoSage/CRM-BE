@@ -1,8 +1,8 @@
-package innosage.crm.attribute.mapper;
+package innosage.crm.domain.attribute.mapper;
 
-import innosage.crm.attribute.Attribute;
-import innosage.crm.attribute.AttributeType;
-import innosage.crm.attribute.dto.AttributeResponseDto;
+import innosage.crm.domain.attribute.Attribute;
+import innosage.crm.domain.attribute.AttributeType;
+import innosage.crm.domain.attribute.dto.AttributeResponseDto;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
