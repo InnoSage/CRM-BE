@@ -3,6 +3,7 @@ package innosage.crm.domain.sheet.controller;
 import innosage.crm.global.common.CommonResponse;
 import innosage.crm.domain.sheet.dto.SheetResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/organizations/{organizationId}/sheet")
+@Tag(name = "sheet")
 public class SheetController {
 
     @GetMapping

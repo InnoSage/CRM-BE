@@ -3,12 +3,14 @@ package innosage.crm.domain.company.controller;
 import innosage.crm.domain.company.dto.CompanyResponseDto;
 import innosage.crm.global.common.CommonResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/sheet/{sheetId}/company")
+@Tag(name = "companies")
 public class CompanyController {
 
     @PostMapping
