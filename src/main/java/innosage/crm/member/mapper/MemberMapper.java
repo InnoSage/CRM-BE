@@ -6,12 +6,14 @@ import innosage.crm.member.entity.Member;
 import innosage.crm.member.entity.MemberStatus;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 //DTO 변환 클래스
+@Component
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MemberMapper {
 
-    public  static Member toMember(String username, String email, String password, String phoneNumber) {
+    public static Member toMember(String username, String email, String password, String phoneNumber) {
         return Member.builder()
                 .username(username)
                 .email(email)
