@@ -21,7 +21,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Slf4j
 @RequiredArgsConstructor
-@EnableWebSecurity(debug = true)
+//@EnableWebSecurity
 @Configuration
 public class SecurityConfig {
 

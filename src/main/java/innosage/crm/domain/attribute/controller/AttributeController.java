@@ -4,6 +4,7 @@ import innosage.crm.domain.attribute.dto.AttributeRequestDto;
 import innosage.crm.domain.attribute.dto.AttributeResponseDto;
 import innosage.crm.global.common.CommonResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/sheet/{sheetId}/attributes")
+@Tag(name = "attributes")
 public class AttributeController {
 
     @PostMapping
