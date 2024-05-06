@@ -16,7 +16,7 @@ public class SwaggerConfig {
                 .version("1.0.0");
 
         return new OpenAPI()
-                .addServersItem(new Server().url("/"))
+                .addServersItem(new Server().url("/dev"))
                 .info(info);
     }
 }

@@ -1,10 +1,8 @@
 package innosage.crm.sheet.mapper;
 
-import innosage.crm.attribute.Attribute;
-import innosage.crm.attribute.dto.AttributeResponseDto;
-import innosage.crm.content.dto.ContentResponseDto;
-import innosage.crm.deal.dto.DealResponseDto;
-import innosage.crm.sheet.Sheet;
+import innosage.crm.domain.attribute.dto.AttributeResponseDto;
+import innosage.crm.domain.deal.dto.DealResponseDto;
+import innosage.crm.domain.sheet.Sheet;
 import innosage.crm.sheet.dto.SheetResponseDto;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

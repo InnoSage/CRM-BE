@@ -1,7 +1,7 @@
 package innosage.crm.sheet.dto;
 
-import innosage.crm.attribute.dto.AttributeResponseDto;
-import innosage.crm.deal.dto.DealResponseDto;
+import innosage.crm.domain.attribute.dto.AttributeResponseDto;
+import innosage.crm.domain.deal.dto.DealResponseDto;
 import lombok.*;
 
 import java.util.List;
