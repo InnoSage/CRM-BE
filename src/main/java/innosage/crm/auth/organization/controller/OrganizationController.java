@@ -5,6 +5,7 @@ import innosage.crm.auth.organization.dto.OrganizationResponseDto;
 import innosage.crm.auth.organization.service.OrganizationService;
 import innosage.crm.global.common.CommonResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/organizations")
+@Tag(name = "organizations")
 public class OrganizationController {
 
     private final OrganizationService organizationService;

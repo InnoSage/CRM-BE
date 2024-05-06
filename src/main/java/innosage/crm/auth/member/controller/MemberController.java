@@ -5,6 +5,7 @@ import innosage.crm.auth.member.dto.MemberResponseDto;
 import innosage.crm.global.common.CommonResponse;
 import innosage.crm.auth.member.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/users")
+@Tag(name = "users")
     public class MemberController {
     private final AuthService authService;
 
