@@ -51,6 +51,10 @@ public enum GlobalErrorCode implements BaseErrorCode {
     //Attribute
     // 404 Not Found - 찾을 수 없음
     ATTRIBUTE_NOT_FOUND(NOT_FOUND, "ATTRIBUTE404_1", "속성을 찾을 수 없습니다."),
+
+    //Organization
+    // 404 Not Found - 찾을 수 없음
+    ORGANIZATION_NOT_FOUND(NOT_FOUND, "ORGANIZATION404_1", "조직을 찾을 수 없습니다."),
     ;
 
     private final HttpStatus httpStatus;

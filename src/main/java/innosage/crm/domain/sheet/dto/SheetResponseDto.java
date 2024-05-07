@@ -2,6 +2,7 @@ package innosage.crm.domain.sheet.dto;
 
 import innosage.crm.domain.attribute.dto.AttributeResponseDto;
 import innosage.crm.domain.deal.dto.DealResponseDto;
+import innosage.crm.domain.sheet.mapper.SheetMapper;
 import lombok.*;
 
 import java.util.List;
@@ -13,9 +14,17 @@ public class SheetResponseDto {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class getSheets {
+    public static class getSheet {
         private Long sheetId;
         private String sheetName;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class getSheets {
+        private List<SheetResponseDto.getSheet> sheets;
     }
 
     @Builder

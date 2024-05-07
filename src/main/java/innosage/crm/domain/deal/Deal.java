@@ -19,8 +19,8 @@ public class Deal extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "companyId")
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "companyId")
     private Company company;
 
     @OneToMany(mappedBy = "deal", cascade = CascadeType.ALL)
