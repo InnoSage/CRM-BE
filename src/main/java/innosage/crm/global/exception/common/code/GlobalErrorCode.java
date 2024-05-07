@@ -38,7 +38,11 @@ public enum GlobalErrorCode implements BaseErrorCode {
 
     //Sheet
     // 404 Not Found - 찾을 수 없음
-    SHEET_NOT_FOUND(NOT_FOUND, "SHEET404_1", "시트를 찾을 수 없습니다.")
+    SHEET_NOT_FOUND(NOT_FOUND, "SHEET404_1", "시트를 찾을 수 없습니다."),
+
+    //Company
+    // 404 Not Found - 찾을 수 없음
+    COMPANY_NOT_FOUND(NOT_FOUND, "COMPANY404_1", "회사를 찾을 수 없습니다."),
     ;
 
     private final HttpStatus httpStatus;
