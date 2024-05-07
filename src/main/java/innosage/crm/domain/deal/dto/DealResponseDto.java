@@ -23,7 +23,6 @@ public class DealResponseDto {
     @AllArgsConstructor
     public static class getDeal {
 
-        private Long dealId;
         private Long companyId;
         private String companyName;
         private List<ContentResponseDto.getContent> contents;

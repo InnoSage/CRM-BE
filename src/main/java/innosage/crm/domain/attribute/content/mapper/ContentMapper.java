@@ -26,6 +26,8 @@ public class ContentMapper {
     public static ContentResponseDto.getContent toGetContent(Content content) {
         return ContentResponseDto.getContent.builder()
                 .attributeId(content.getAttribute().getId())
+                .attributeName(content.getAttribute().getName())
+                .dataType(content.getAttribute().getType().name())
                 .value(content.getValue())
                 .build();
     }

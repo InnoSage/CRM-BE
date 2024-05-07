@@ -9,4 +9,10 @@ public class DealRequestDto {
 
         private Long companyId;
     }
+
+    @Getter
+    public static class changeCompany {
+
+        private Long companyId;
+    }
 }

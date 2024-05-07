@@ -12,6 +12,8 @@ public class ContentResponseDto {
     public static class getContent {
 
         private Long attributeId;
+        private String attributeName;
+        private String dataType;
         private String value;
     }
 }

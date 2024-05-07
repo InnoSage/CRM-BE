@@ -25,4 +25,8 @@ public class Deal extends BaseEntity {
 
     @OneToMany(mappedBy = "deal", cascade = CascadeType.ALL)
     private List<Content> contents;
+
+    public void changeCompany(Company newCompany) {
+        this.company = newCompany;
+    }
 }

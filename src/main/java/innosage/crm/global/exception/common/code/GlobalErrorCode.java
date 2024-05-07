@@ -43,6 +43,10 @@ public enum GlobalErrorCode implements BaseErrorCode {
     //Company
     // 404 Not Found - 찾을 수 없음
     COMPANY_NOT_FOUND(NOT_FOUND, "COMPANY404_1", "회사를 찾을 수 없습니다."),
+
+    //Deal
+    // 404 Not Found - 찾을 수 없음
+    DEAL_NOT_FOUND(NOT_FOUND, "DEAL404_1", "거래를 찾을 수 없습니다."),
     ;
 
     private final HttpStatus httpStatus;
