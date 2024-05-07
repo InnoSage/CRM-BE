@@ -21,21 +21,21 @@ import org.springframework.web.bind.annotation.RestController;
     private final AuthService authService;
 
     @PostMapping("/register")
-    @Operation(summary = "회원가입", description = "회원가입을 진행합니다.")
+    @Operation(summary = "회원가입 ✔\uFE0F", description = "회원가입을 진행합니다.")
     public CommonResponse<MemberResponseDto.register> signup(@Valid @RequestBody MemberRequestDto.register request) {
        return CommonResponse.onSuccess(authService.register(request));
     }
 
 
     @PostMapping("/login")
-    @Operation(summary = "로그인", description = "로그인을 진행합니다.")
+    @Operation(summary = "로그인 ✔\uFE0F", description = "로그인을 진행합니다.")
     public CommonResponse<MemberResponseDto.login> login(@RequestBody MemberRequestDto.login request) {
         return CommonResponse.onSuccess(authService.login(request));
     }
 
 
     @PostMapping("/reissue")
-    @Operation(summary = "토큰 재발급", description = "토큰을 재발급 합니다.")
+    @Operation(summary = "토큰 재발급 ✔\uFE0F", description = "토큰을 재발급 합니다.")
     public CommonResponse<MemberResponseDto.reissue> reissue(@RequestBody MemberRequestDto.reissue request) {
         return CommonResponse.onSuccess(authService.reissue(request));
     }

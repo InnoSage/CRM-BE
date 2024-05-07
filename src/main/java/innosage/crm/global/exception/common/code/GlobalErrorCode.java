@@ -35,6 +35,10 @@ public enum GlobalErrorCode implements BaseErrorCode {
     //Member
     // 404 Not Found - 찾을 수 없음
     MEMBER_NOT_FOUND(NOT_FOUND, "MEMBER404_1", "회원을 찾을 수 없습니다."),
+
+    //Sheet
+    // 404 Not Found - 찾을 수 없음
+    SHEET_NOT_FOUND(NOT_FOUND, "SHEET404_1", "시트를 찾을 수 없습니다.")
     ;
 
     private final HttpStatus httpStatus;
