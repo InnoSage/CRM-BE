@@ -1,6 +1,5 @@
 package innosage.crm.domain.deal.service;
 
-import innosage.crm.domain.attribute.content.Content;
 import innosage.crm.domain.company.Company;
 import innosage.crm.domain.company.service.CompanyQueryAdapter;
 import innosage.crm.domain.deal.Deal;
@@ -12,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 @Service
 @AllArgsConstructor

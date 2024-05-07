@@ -1,6 +1,6 @@
 package innosage.crm.domain.deal;
 
-import innosage.crm.domain.attribute.content.Content;
+import innosage.crm.domain.content.Content;
 import innosage.crm.domain.company.Company;
 import innosage.crm.global.common.BaseEntity;
 import jakarta.persistence.*;

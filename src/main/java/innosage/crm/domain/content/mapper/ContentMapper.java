@@ -1,8 +1,8 @@
-package innosage.crm.domain.attribute.content.mapper;
+package innosage.crm.domain.content.mapper;
 
 import innosage.crm.domain.attribute.Attribute;
-import innosage.crm.domain.attribute.content.Content;
-import innosage.crm.domain.attribute.content.dto.ContentResponseDto;
+import innosage.crm.domain.content.Content;
+import innosage.crm.domain.content.dto.ContentResponseDto;
 import innosage.crm.domain.deal.Deal;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

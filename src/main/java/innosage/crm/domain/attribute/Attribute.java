@@ -1,6 +1,6 @@
 package innosage.crm.domain.attribute;
 
-import innosage.crm.domain.attribute.content.Content;
+import innosage.crm.domain.content.Content;
 import innosage.crm.domain.sheet.Sheet;
 import jakarta.persistence.*;
 import lombok.*;

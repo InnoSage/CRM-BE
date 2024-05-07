@@ -1,6 +1,6 @@
 package innosage.crm.domain.deal.mapper;
 
-import innosage.crm.domain.attribute.content.mapper.ContentMapper;
+import innosage.crm.domain.content.mapper.ContentMapper;
 import innosage.crm.domain.company.Company;
 import innosage.crm.domain.deal.Deal;
 import innosage.crm.domain.deal.dto.DealResponseDto;

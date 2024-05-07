@@ -1,4 +1,4 @@
-package innosage.crm.domain.attribute.content.dto;
+package innosage.crm.domain.content.dto;
 
 import lombok.Getter;
 
