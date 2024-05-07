@@ -3,6 +3,7 @@ package innosage.crm.domain.attribute.mapper;
 import innosage.crm.domain.attribute.Attribute;
 import innosage.crm.domain.attribute.AttributeType;
 import innosage.crm.domain.attribute.dto.AttributeResponseDto;
+import innosage.crm.domain.sheet.Sheet;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -14,11 +15,12 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AttributeMapper {
 
-    public static Attribute toAttribute(String name, String type, String description) {
+    public static Attribute toAttribute(String name, String type, String description, Sheet sheet) {
         return Attribute.builder()
                 .name(name)
                 .type(AttributeType.valueOf(type))
                 .description(description)
+                .sheet(sheet)
                 .build();
     }
 

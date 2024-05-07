@@ -29,4 +29,10 @@ public class Attribute {
     @JoinColumn(name = "sheet_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Sheet sheet;
+
+    public void update(String name, String dataType, String description) {
+        this.name = name;
+        this.type = AttributeType.valueOf(dataType);
+        this.description = description;
+    }
 }
