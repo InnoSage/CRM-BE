@@ -1,6 +1,6 @@
 package innosage.crm.domain.deal;
 
-import innosage.crm.domain.attribute.content.Content;
+import innosage.crm.domain.content.Content;
 import innosage.crm.domain.company.Company;
 import innosage.crm.global.common.BaseEntity;
 import jakarta.persistence.*;
@@ -19,10 +19,14 @@ public class Deal extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "companyId")
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "companyId")
     private Company company;
 
     @OneToMany(mappedBy = "deal", cascade = CascadeType.ALL)
     private List<Content> contents;
+
+    public void changeCompany(Company newCompany) {
+        this.company = newCompany;
+    }
 }

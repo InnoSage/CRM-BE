@@ -1,11 +1,12 @@
 package innosage.crm.domain.company;
 
+import innosage.crm.domain.deal.Deal;
+import innosage.crm.domain.sheet.Sheet;
 import innosage.crm.global.common.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,4 +21,10 @@ public class Company extends BaseEntity {
 
     private String name;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sheet_id")
+    private Sheet sheet;
+
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    private List<Deal> deals;
 }

@@ -2,6 +2,7 @@ package innosage.crm.domain.company.mapper;
 
 import innosage.crm.domain.company.Company;
 import innosage.crm.domain.company.dto.CompanyResponseDto;
+import innosage.crm.domain.sheet.Sheet;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,9 +14,10 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CompanyMapper {
 
-    public static Company toCompany(String name, String description) {
+    public static Company toCompany(Sheet sheet, String name) {
         return Company.builder()
                 .name(name)
+                .sheet(sheet)
                 .build();
     }
 

@@ -1,4 +1,4 @@
-package innosage.crm.domain.attribute.content;
+package innosage.crm.domain.content;
 
 import innosage.crm.domain.attribute.Attribute;
 import innosage.crm.domain.deal.Deal;

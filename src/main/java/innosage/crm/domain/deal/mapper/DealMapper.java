@@ -1,6 +1,6 @@
 package innosage.crm.domain.deal.mapper;
 
-import innosage.crm.domain.attribute.content.mapper.ContentMapper;
+import innosage.crm.domain.content.mapper.ContentMapper;
 import innosage.crm.domain.company.Company;
 import innosage.crm.domain.deal.Deal;
 import innosage.crm.domain.deal.dto.DealResponseDto;
@@ -29,7 +29,6 @@ public class DealMapper {
 
     public static DealResponseDto.getDeal toGetDeal(Deal deal) {
         return DealResponseDto.getDeal.builder()
-                .dealId(deal.getId())
                 .companyId(deal.getCompany().getId())
                 .companyName(deal.getCompany().getName())
                 .contents(deal.getContents().stream().map(ContentMapper::toGetContent).collect(Collectors.toList()))

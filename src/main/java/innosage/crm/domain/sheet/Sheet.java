@@ -1,5 +1,6 @@
 package innosage.crm.domain.sheet;
 
+import innosage.crm.auth.organization.Organization;
 import innosage.crm.domain.attribute.Attribute;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,4 +22,8 @@ public class Sheet {
 
     @OneToMany(mappedBy = "sheet", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Attribute> attributes;
+
+    @ManyToOne
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
 }

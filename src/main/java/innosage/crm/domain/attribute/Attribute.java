@@ -1,6 +1,6 @@
 package innosage.crm.domain.attribute;
 
-import innosage.crm.domain.attribute.content.Content;
+import innosage.crm.domain.content.Content;
 import innosage.crm.domain.sheet.Sheet;
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,4 +29,10 @@ public class Attribute {
     @JoinColumn(name = "sheet_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Sheet sheet;
+
+    public void update(String name, String dataType, String description) {
+        this.name = name;
+        this.type = AttributeType.valueOf(dataType);
+        this.description = description;
+    }
 }

@@ -1,8 +1,8 @@
-package innosage.crm.domain.attribute.content.mapper;
+package innosage.crm.domain.content.mapper;
 
 import innosage.crm.domain.attribute.Attribute;
-import innosage.crm.domain.attribute.content.Content;
-import innosage.crm.domain.attribute.content.dto.ContentResponseDto;
+import innosage.crm.domain.content.Content;
+import innosage.crm.domain.content.dto.ContentResponseDto;
 import innosage.crm.domain.deal.Deal;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -26,6 +26,8 @@ public class ContentMapper {
     public static ContentResponseDto.getContent toGetContent(Content content) {
         return ContentResponseDto.getContent.builder()
                 .attributeId(content.getAttribute().getId())
+                .attributeName(content.getAttribute().getName())
+                .dataType(content.getAttribute().getType().name())
                 .value(content.getValue())
                 .build();
     }
