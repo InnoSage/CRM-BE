@@ -1,5 +1,7 @@
 package innosage.crm.domain.deal.dto;
 
+import innosage.crm.domain.attribute.dto.AttributeResponseDto;
+import innosage.crm.domain.content.Content;
 import innosage.crm.domain.content.dto.ContentResponseDto;
 import lombok.*;
 
@@ -25,6 +27,7 @@ public class DealResponseDto {
 
         private Long companyId;
         private String companyName;
-        private List<ContentResponseDto.getContent> contents;
+        private List<ContentResponseDto.getContent> attributes;
+//        private List<NoteResponseDto.getNote> notes;
     }
 }

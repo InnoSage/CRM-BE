@@ -31,7 +31,7 @@ public class DealMapper {
         return DealResponseDto.getDeal.builder()
                 .companyId(deal.getCompany().getId())
                 .companyName(deal.getCompany().getName())
-                .contents(deal.getContents().stream().map(ContentMapper::toGetContent).collect(Collectors.toList()))
+                .attributes(deal.getContents().stream().map(ContentMapper::toGetContent).collect(Collectors.toList()))
                 .build();
     }
 
