@@ -59,6 +59,10 @@ public enum GlobalErrorCode implements BaseErrorCode {
     //Note
     // 404 Not Found - 찾을 수 없음
     NOTE_NOT_FOUND(NOT_FOUND, "NOTE404_1", "노트를 찾을 수 없습니다."),
+
+    //Email
+    //400 Bad Request - 잘못된 요청
+    INVALID_EMAIL_CODE(BAD_REQUEST, "EMAIL400_1", "인증 코드가 유효하지 않습니다.");
     ;
 
     private final HttpStatus httpStatus;
