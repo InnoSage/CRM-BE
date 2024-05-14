@@ -2,6 +2,7 @@ package innosage.crm.domain.deal;
 
 import innosage.crm.domain.content.Content;
 import innosage.crm.domain.company.Company;
+import innosage.crm.domain.note.Note;
 import innosage.crm.global.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,6 +26,9 @@ public class Deal extends BaseEntity {
 
     @OneToMany(mappedBy = "deal", cascade = CascadeType.ALL)
     private List<Content> contents;
+
+    @OneToMany(mappedBy = "deal", cascade = CascadeType.ALL)
+    private List<Note> notes;
 
     public void changeCompany(Company newCompany) {
         this.company = newCompany;

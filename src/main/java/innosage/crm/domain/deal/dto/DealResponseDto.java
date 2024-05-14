@@ -3,6 +3,7 @@ package innosage.crm.domain.deal.dto;
 import innosage.crm.domain.attribute.dto.AttributeResponseDto;
 import innosage.crm.domain.content.Content;
 import innosage.crm.domain.content.dto.ContentResponseDto;
+import innosage.crm.domain.note.dto.NoteResponseDto;
 import lombok.*;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class DealResponseDto {
     @AllArgsConstructor
     public static class addDeal {
 
-            private Long dealId;
+        private Long dealId;
     }
 
     @Builder
@@ -28,6 +29,6 @@ public class DealResponseDto {
         private Long companyId;
         private String companyName;
         private List<ContentResponseDto.getContent> attributes;
-//        private List<NoteResponseDto.getNote> notes;
+        private List<NoteResponseDto.getNote> notes;
     }
 }
