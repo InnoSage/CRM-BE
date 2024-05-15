@@ -27,7 +27,6 @@ public class MemberCommandAdapter {
     private final MemberRepository memberRepository;
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
-    private final RedisService redisService;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
     public Member register(Member member) {
@@ -42,7 +41,12 @@ public class MemberCommandAdapter {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String accessToken = tokenProvider.createAccessToken(member, List.of(new SimpleGrantedAuthority(Authority.ROLE_USER.name())));
-        String refreshToken = redisService.generateRefreshToken(member).getRefreshToken();
+        String refreshToken = tokenProvider.createRefreshToken();
+
+        refreshTokenRepository.save(RefreshToken.builder()
+                .memberId(member.getId())
+                .refreshToken(refreshToken)
+                .build());
 
         return TokenDto.builder()
                 .accessToken(accessToken)
@@ -53,11 +57,17 @@ public class MemberCommandAdapter {
     public TokenDto reissueToken(Member member, RefreshToken refreshToken){
 
         String accessToken = tokenProvider.createAccessToken(member, List.of(new SimpleGrantedAuthority(Authority.ROLE_USER.name())));
-        RefreshToken newRefreshToken = redisService.reGenerateRefreshToken(member, refreshToken);
+        String newRefreshToken = tokenProvider.createRefreshToken();
+
+        refreshTokenRepository.delete(refreshToken);
+        refreshTokenRepository.save(RefreshToken.builder()
+                .memberId(member.getId())
+                .refreshToken(newRefreshToken)
+                .build());
 
         return TokenDto.builder()
                 .accessToken(accessToken)
-                .refreshToken(newRefreshToken.getRefreshToken())
+                .refreshToken(newRefreshToken)
                 .build();
     }
 }
