@@ -40,7 +40,7 @@ public class SecurityConfig {
             new JwtAuthenticationExceptionHandler();
 
     private static final String[] JWT_WHITE_LIST ={
-            "/users/register","/users/login","/users/reissue"
+            "users/email/code/**", "/users/register","/users/login","/users/reissue"
     };
 
     /**

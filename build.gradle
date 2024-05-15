@@ -43,6 +43,10 @@ dependencies {
     implementation 'io.springfox:springfox-swagger2:2.9.2'
     implementation 'io.springfox:springfox-swagger-ui:2.9.2'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+    //Java mail
+    implementation 'javax.mail:mail:1.4.7'
+    // Spring Context Support
+    implementation 'org.springframework:spring-context-support:5.3.9'
 
 
     // Spring Boot Test dependencies
