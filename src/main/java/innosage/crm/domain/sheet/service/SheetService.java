@@ -55,7 +55,7 @@ public class SheetService {
                         DealMapper::toGetDealList  // 거래 목록을 DealResponseDto.getDeal 리스트로 변환
                 ));
 
-        return SheetMapper.toGetSheetDetails(sheet, allAttributes, allDeals);
+        return SheetMapper.toGetSheetDetails(sheet, allAttributes, allDeals, companies);
     }
 }
 
