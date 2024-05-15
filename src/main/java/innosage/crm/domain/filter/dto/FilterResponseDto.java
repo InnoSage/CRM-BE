@@ -13,4 +13,15 @@ public class FilterResponseDto {
 
         private Long filterId;
     }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class getFilter {
+
+        private Long targetAttributeId;
+        private String keyword;
+        private String filterType;
+    }
 }

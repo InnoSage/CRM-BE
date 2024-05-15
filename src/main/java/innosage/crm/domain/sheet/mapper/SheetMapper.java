@@ -1,7 +1,10 @@
 package innosage.crm.domain.sheet.mapper;
 
 import innosage.crm.domain.attribute.dto.AttributeResponseDto;
+import innosage.crm.domain.company.Company;
+import innosage.crm.domain.company.mapper.CompanyMapper;
 import innosage.crm.domain.deal.dto.DealResponseDto;
+import innosage.crm.domain.filter.mapper.FilterMapper;
 import innosage.crm.domain.sheet.Sheet;
 import innosage.crm.domain.sheet.dto.SheetResponseDto;
 import lombok.AccessLevel;
@@ -37,11 +40,16 @@ public class SheetMapper {
                 .build();
     }
 
-    public static SheetResponseDto.getSheetDetails toGetSheetDetails(Sheet sheet, List<AttributeResponseDto.getAttribute> attributes, List<DealResponseDto.getDeal> deals) {
+    public static SheetResponseDto.getSheetDetails toGetSheetDetails(Sheet sheet, List<AttributeResponseDto.getAttribute> attributes, List<DealResponseDto.getDeal> deals, List<Company> companies) {
         return SheetResponseDto.getSheetDetails.builder()
                 .sheetId(sheet.getId())
                 .sheetName(sheet.getName())
+                .companies(CompanyMapper.toGetCompanyList(companies))
                 .attributes(attributes)
+                .filters(sheet.getFilters().stream()
+                        .map(FilterMapper::toGetFilter)
+                        .collect(Collectors.toList())
+                        )
                 .deals(deals)
                 .build();
     }

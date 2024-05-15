@@ -27,4 +27,12 @@ public class FilterMapper {
                 .filterId(filter.getId())
                 .build();
     }
+
+    public static FilterResponseDto.getFilter toGetFilter(Filter filter) {
+        return FilterResponseDto.getFilter.builder()
+                .targetAttributeId(filter.getTargetAttribute().getId())
+                .keyword(filter.getKeyword())
+                .filterType(filter.getFilterType().name())
+                .build();
+    }
 }

@@ -28,7 +28,7 @@ public class DealResponseDto {
 
         private Long companyId;
         private String companyName;
-        private List<ContentResponseDto.getContent> attributes;
+        private List<ContentResponseDto.getContent> contents;
         private List<NoteResponseDto.getNote> notes;
     }
 }
