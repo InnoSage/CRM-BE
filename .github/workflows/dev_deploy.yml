@@ -27,11 +27,11 @@ jobs:
         run: ./gradlew clean build -x test
         shell: bash # (8).빌드
 
-      - name: Install Redis CLI
-        run: sudo apt-get update && sudo apt-get install -y redis-tools # redis-tools 설치
-
-      - name: Test Redis connection
-        run: redis-cli -h ${{ secrets.AWS_REDIS_URL }} -p 6379 ping # Redis 연결 테스트
+#      - name: Install Redis CLI
+#        run: sudo apt-get update && sudo apt-get install -y redis-tools # redis-tools 설치
+#
+#      - name: Test Redis connection
+#        run: redis-cli -h ${{ secrets.AWS_REDIS_URL }} -p 6379 ping # Redis 연결 테스트
 
 
       - name: Get current time

@@ -13,16 +13,16 @@ spring:
         hbm2ddl:
           auto: update
         default_batch_fetch_size: 1000
-  data:
-    redis:
-      host: ${REDIS_URL}
-      port: 6379
-      lettuce:
-        pool:
-          max-active: 8
-          max-idle: 8
-          min-idle: 0
-        timeout: 60s
+#  data:
+#    redis:
+#      host: ${REDIS_URL}
+#      port: 6379
+#      lettuce:
+#        pool:
+#          max-active: 8
+#          max-idle: 8
+#          min-idle: 0
+#        timeout: 60s
 
 
 jwt:
