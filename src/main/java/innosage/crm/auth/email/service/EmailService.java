@@ -1,9 +1,10 @@
 package innosage.crm.auth.email.service;
 
+import innosage.crm.auth.email.EmailCode;
 import innosage.crm.auth.email.dto.EmailRequestDto;
+import innosage.crm.auth.email.mapper.EmailCodeMapper;
 import innosage.crm.global.exception.common.GeneralException;
 import innosage.crm.global.exception.common.code.GlobalErrorCode;
-import innosage.crm.global.redis.util.RedisUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -18,7 +19,8 @@ import java.util.Random;
 public class EmailService {
 
     private final JavaMailSender javaMailSender;
-    private final RedisUtil redisUtil;
+    private final EmailCodeCommandAdapter emailCodeCommandAdapter;
+    private final EmailCodeQueryAdapter emailCodeQueryAdapter;
     private Integer code;
 
     public void makeRandomNumber() {
@@ -60,13 +62,18 @@ public class EmailService {
             // 이러한 경우 MessagingException이 발생
             e.printStackTrace();//e.printStackTrace()는 예외를 기본 오류 스트림에 출력하는 메서드
         }
-        redisUtil.setDataExpire(Integer.toString(code), toMail, 300L);
+        EmailCode emailCode = EmailCodeMapper.toEmailCode(toMail, code);
+        emailCodeCommandAdapter.saveEmailCode(emailCode);
     }
 
     public void checkCode(EmailRequestDto.verifyEmail request) {
-        String savedEmail = redisUtil.getData(request.getCode());
-        if((savedEmail== null) || (!savedEmail.equals(request.getEmail()))){
+        String emailCode = request.getCode();
+        EmailCode savedCode = emailCodeQueryAdapter.findByCode(request.getCode());
+        if((emailCode== null) || (!emailCode.equals(savedCode.getCode()))) {
             throw new GeneralException(GlobalErrorCode.INVALID_EMAIL_CODE);
+        } else {
+            System.out.println("인증 성공");
+            emailCodeCommandAdapter.deleteEmailCode(savedCode);
         }
     }
 }
