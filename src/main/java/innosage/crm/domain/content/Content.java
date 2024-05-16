@@ -23,7 +23,7 @@ public class Content extends BaseEntity {
     @ManyToOne
     private Deal deal;
 
-    @JoinColumn
-    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "attribute_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Attribute attribute;
 }
