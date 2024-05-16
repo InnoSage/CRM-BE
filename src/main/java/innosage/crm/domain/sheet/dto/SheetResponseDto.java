@@ -16,6 +16,15 @@ public class SheetResponseDto {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
+    public static class addSheet {
+
+        private Long sheetId;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class getSheet {
         private Long sheetId;
         private String sheetName;
