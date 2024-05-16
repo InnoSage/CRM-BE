@@ -1,5 +1,6 @@
 package innosage.crm.domain.sheet.mapper;
 
+import innosage.crm.auth.organization.Organization;
 import innosage.crm.domain.attribute.dto.AttributeResponseDto;
 import innosage.crm.domain.company.Company;
 import innosage.crm.domain.company.mapper.CompanyMapper;
@@ -18,9 +19,16 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SheetMapper {
 
-    public static Sheet toSheet(String name, String description) {
+    public static Sheet toSheet(String name, Organization organization) {
         return Sheet.builder()
                 .name(name)
+                .organization(organization)
+                .build();
+    }
+
+    public static SheetResponseDto.addSheet toAddSheet(Sheet sheet) {
+        return SheetResponseDto.addSheet.builder()
+                .sheetId(sheet.getId())
                 .build();
     }
 

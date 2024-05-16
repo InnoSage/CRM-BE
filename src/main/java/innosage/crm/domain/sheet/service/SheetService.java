@@ -5,14 +5,12 @@ import innosage.crm.auth.organization.service.OrganizationQueryAdapter;
 import innosage.crm.domain.attribute.Attribute;
 import innosage.crm.domain.attribute.dto.AttributeResponseDto;
 import innosage.crm.domain.attribute.mapper.AttributeMapper;
-import innosage.crm.domain.attribute.service.AttributeQueryAdapter;
 import innosage.crm.domain.company.Company;
 import innosage.crm.domain.company.service.CompanyQueryAdapter;
-import innosage.crm.domain.deal.Deal;
 import innosage.crm.domain.deal.dto.DealResponseDto;
 import innosage.crm.domain.deal.mapper.DealMapper;
-import innosage.crm.domain.deal.service.DealQueryAdapter;
 import innosage.crm.domain.sheet.Sheet;
+import innosage.crm.domain.sheet.dto.SheetRequestDto;
 import innosage.crm.domain.sheet.dto.SheetResponseDto;
 import innosage.crm.domain.sheet.mapper.SheetMapper;
 import lombok.AllArgsConstructor;
@@ -32,6 +30,15 @@ public class SheetService {
     private final SheetQueryAdapter sheetQueryAdapter;
     private final OrganizationQueryAdapter organizationQueryAdapter;
     private final CompanyQueryAdapter companyQueryAdapter;
+
+    @Transactional
+    public SheetResponseDto.addSheet addSheet(Long organizationId, SheetRequestDto.addSheet request) {
+        Organization organization = organizationQueryAdapter.findById(organizationId);
+        Sheet sheet = SheetMapper.toSheet(request.getName(), organization);
+        sheetCommandAdapter.addSheet(sheet);
+
+        return SheetMapper.toAddSheet(sheet);
+    }
 
 
     @Transactional(readOnly = true)
