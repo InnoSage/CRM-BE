@@ -5,6 +5,8 @@ import innosage.crm.domain.sheet.Sheet;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Builder
@@ -23,8 +25,8 @@ public class Attribute {
 
     private String description;
 
-    @OneToOne(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Content content;
+    @OneToMany(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Content> content;
 
     @JoinColumn(name = "sheet_id")
     @ManyToOne(fetch = FetchType.LAZY)
