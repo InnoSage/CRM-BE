@@ -3,6 +3,7 @@ package innosage.crm.domain.attribute.mapper;
 import innosage.crm.domain.attribute.Attribute;
 import innosage.crm.domain.attribute.AttributeType;
 import innosage.crm.domain.attribute.dto.AttributeResponseDto;
+import innosage.crm.domain.attribute.strategy.AttributeStrategyFactory;
 import innosage.crm.domain.sheet.Sheet;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,7 @@ public class AttributeMapper {
                 .name(attribute.getName())
                 .dataType(attribute.getType().name())
                 .description(attribute.getDescription())
+                .data(AttributeStrategyFactory.getStrategy(attribute.getType()).getData(attribute))
                 .build();
     }
 
@@ -43,6 +45,7 @@ public class AttributeMapper {
                 .attributeId(attribute.getId())
                 .attributeName(attribute.getName())
                 .dataType(attribute.getType().name())
+                .data(AttributeStrategyFactory.getStrategy(attribute.getType()).getData(attribute))
                 .build();
     }
 

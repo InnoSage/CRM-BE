@@ -2,6 +2,8 @@ package innosage.crm.domain.attribute.dto;
 
 import lombok.Getter;
 
+import java.util.Map;
+
 public class AttributeRequestDto {
 
     @Getter
@@ -10,6 +12,7 @@ public class AttributeRequestDto {
         private String dataType;
         private String name;
         private String description;
+        private Map<String, Object> data;
     }
 
     @Getter
@@ -18,5 +21,6 @@ public class AttributeRequestDto {
         private String dataType;
         private String name;
         private String description;
+        private Map<String, Object> data;
     }
 }
