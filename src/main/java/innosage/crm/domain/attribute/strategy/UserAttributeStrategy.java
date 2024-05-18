@@ -1,7 +1,6 @@
 package innosage.crm.domain.attribute.strategy;
 
 import innosage.crm.domain.attribute.Attribute;
-import innosage.crm.domain.attribute.UserOption;
 
 import java.util.Collections;
 import java.util.HashMap;

@@ -1,11 +1,12 @@
 package innosage.crm.domain.attribute;
 
+import innosage.crm.domain.attribute.option.Option;
+import innosage.crm.domain.attribute.useroption.UserOption;
 import innosage.crm.domain.content.Content;
 import innosage.crm.domain.sheet.Sheet;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

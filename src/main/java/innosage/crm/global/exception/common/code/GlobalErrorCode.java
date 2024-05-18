@@ -62,7 +62,11 @@ public enum GlobalErrorCode implements BaseErrorCode {
 
     //Email
     //400 Bad Request - 잘못된 요청
-    INVALID_EMAIL_CODE(BAD_REQUEST, "EMAIL400_1", "인증 코드가 유효하지 않습니다.");
+    INVALID_EMAIL_CODE(BAD_REQUEST, "EMAIL400_1", "인증 코드가 유효하지 않습니다."),
+
+    // Option
+    // 404 Not Found - 찾을 수 없음
+    OPTION_NOT_FOUND(NOT_FOUND, "OPTION404_1", "옵션을 찾을 수 없습니다."),
     ;
 
     private final HttpStatus httpStatus;
