@@ -20,7 +20,7 @@ public class OrganizationController {
     private final OrganizationService organizationService;
 
     @PostMapping
-    @Operation(summary = "조직 추가", description = "조직을 추가합니다. ")
+    @Operation(summary = "조직 추가 ✔\uFE0F \uD83D\uDD11", description = "조직을 추가합니다. ")
     public CommonResponse<OrganizationResponseDto.addOrganization> addOrganization(
             @RequestBody OrganizationRequestDto.addOrganization request
             ) {
@@ -28,16 +28,18 @@ public class OrganizationController {
     }
 
     @GetMapping
-    @Operation(summary = "조직 조회", description = "조직을 조회합니다.")
+    @Operation(summary = "조직 조회 ✔\uFE0F \uD83D\uDD11", description = "조직을 조회합니다.")
     public CommonResponse<List<OrganizationResponseDto.getOrganization>> getOrganizations() {
 
         return CommonResponse.onSuccess(organizationService.getOrganizations());
     }
 
     @PatchMapping("/{organizationId}/members")
-    public CommonResponse<?> manageOrganization(
-            @PathVariable Long organizationId
+    @Operation(summary = "조직 멤버 관리 ✔\uFE0F \uD83D\uDD11", description = "조직의 멤버를 관리합니다.")
+    public CommonResponse<OrganizationResponseDto.updateMember> manageOrganization(
+            @PathVariable Long organizationId,
+            @RequestBody OrganizationRequestDto.updateMember request
     ) {
-        return CommonResponse.onSuccess(null);
+        return CommonResponse.onSuccess(organizationService.updateMember(organizationId, request));
     }
 }

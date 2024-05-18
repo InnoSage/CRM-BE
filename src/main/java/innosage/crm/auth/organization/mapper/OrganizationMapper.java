@@ -35,4 +35,10 @@ public class OrganizationMapper {
                 .toList();
     }
 
+    public static OrganizationResponseDto.updateMember toUpdateMember(Organization organization) {
+        return OrganizationResponseDto.updateMember.builder()
+                .organizationId(organization.getId())
+                .build();
+    }
+
 }
