@@ -1,5 +1,6 @@
-package innosage.crm.domain.attribute;
+package innosage.crm.domain.attribute.option;
 
+import innosage.crm.domain.attribute.Attribute;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,5 +21,9 @@ public class Option {
     @JoinColumn(name = "attribute_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Attribute attribute;
+
+    public void update(String name) {
+        this.name = name;
+    }
 
 }
