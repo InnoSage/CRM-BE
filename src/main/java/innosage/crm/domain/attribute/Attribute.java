@@ -5,6 +5,7 @@ import innosage.crm.domain.sheet.Sheet;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,8 +26,16 @@ public class Attribute {
 
     private String description;
 
+    private String currencyCode;
+
     @OneToMany(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Content> content;
+
+    @OneToMany(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Option> options;
+
+    @OneToMany(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserOption> userOptions;
 
     @JoinColumn(name = "sheet_id")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,5 +45,14 @@ public class Attribute {
         this.name = name;
         this.type = AttributeType.valueOf(dataType);
         this.description = description;
+    }
+
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
+    }
+
+
+    public void setUserOptions(List<UserOption> userOptions) {
+        this.userOptions = userOptions;
     }
 }

@@ -1,9 +1,12 @@
 package innosage.crm.domain.attribute.service;
 
 import innosage.crm.domain.attribute.Attribute;
+import innosage.crm.domain.attribute.AttributeType;
 import innosage.crm.domain.attribute.dto.AttributeRequestDto;
 import innosage.crm.domain.attribute.dto.AttributeResponseDto;
 import innosage.crm.domain.attribute.mapper.AttributeMapper;
+import innosage.crm.domain.attribute.strategy.AttributeStrategy;
+import innosage.crm.domain.attribute.strategy.AttributeStrategyFactory;
 import innosage.crm.domain.sheet.Sheet;
 import innosage.crm.domain.sheet.service.SheetQueryAdapter;
 import lombok.AllArgsConstructor;
@@ -25,8 +28,14 @@ public class AttributeService {
     @Transactional
     public AttributeResponseDto.addAttribute addAttribute(Long sheetId, AttributeRequestDto.addAttribute request) {
         Sheet sheet = sheetQueryAdapter.findById(sheetId);
-        Attribute attribute = AttributeMapper.toAttribute(request.getName(), request.getDataType(), request.getDescription(), sheet);
+        AttributeType type = AttributeType.valueOf(request.getDataType());
+        Attribute attribute = AttributeMapper.toAttribute(request.getName(), String.valueOf(type), request.getDescription(), sheet);
         Attribute savedAttribute = attributeCommandAdapter.addAttribute(attribute);
+
+        AttributeStrategy strategy = AttributeStrategyFactory.getStrategy(type);
+        if (strategy != null) {
+            strategy.setData(attribute, request.getData());
+        }
 
         return AttributeMapper.toAddAttribute(savedAttribute);
     }
@@ -34,7 +43,13 @@ public class AttributeService {
     @Transactional
     public AttributeResponseDto.updateAttribute updateAttribute(Long attributeId, AttributeRequestDto.updateAttribute request) {
         Attribute attribute = attributeQueryAdapter.findById(attributeId);
-        attribute.update(request.getName(), request.getDataType(), request.getDescription());
+        AttributeType type = AttributeType.valueOf(request.getDataType());
+        attribute.update(request.getName(), String.valueOf(type), request.getDescription());
+
+        AttributeStrategy strategy = AttributeStrategyFactory.getStrategy(type);
+        if (strategy != null) {
+            strategy.setData(attribute, request.getData());
+        }
 
         return AttributeMapper.toUpdateAttribute(attribute);
     }
