@@ -1,9 +1,13 @@
 package innosage.crm.auth.organization.service;
 
+import innosage.crm.auth.member.entity.Member;
+import innosage.crm.auth.member.service.MemberQueryAdapter;
 import innosage.crm.auth.organization.Organization;
 import innosage.crm.auth.organization.dto.OrganizationRequestDto;
 import innosage.crm.auth.organization.dto.OrganizationResponseDto;
 import innosage.crm.auth.organization.mapper.OrganizationMapper;
+import innosage.crm.global.exception.common.GeneralException;
+import innosage.crm.global.exception.common.code.GlobalErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,6 +22,7 @@ public class OrganizationService {
 
     private final OrganizationCommandAdapter organizationCommandAdapter;
     private final OrganizationQueryAdapter organizationQueryAdapter;
+    private final MemberQueryAdapter memberQueryAdapter;
 
     @Transactional
     public OrganizationResponseDto.addOrganization addOrganization(OrganizationRequestDto.addOrganization request) {
@@ -34,12 +39,17 @@ public class OrganizationService {
         return OrganizationMapper.toGetOrganizations(organizations);
     }
 
-//    @Transactional
-//    public OrganizationResponseDto.manageOrganization updateOrganization(OrganizationRequestDto.updateOrganization request) {
-//        Organization organization = organizationQueryAdapter.findById(request.getOrganizationId())
-//                .orElseThrow(() -> new OrganizationException(GlobalErrorCode.ORGANIZATION_NOT_FOUND));
-//        organization.updateOrganizationName(request.getOrganizationName());
-//
-//        return OrganizationMapper.toUpdateOrganization(organization);
-//    }
+    @Transactional
+    public OrganizationResponseDto.updateMember updateMember(Long organizationId, OrganizationRequestDto.updateMember request) {
+        Organization organization = organizationQueryAdapter.findById(organizationId);
+        List<Member> members = request.getMemberIds().stream().map(memberQueryAdapter::findById).toList();
+        organization.updateMember(members);
+        members.forEach(member -> {
+            if ((member.getOrganization() == null) || (!member.getOrganization().equals(organization))) {
+                member.setOrganization(organization);
+            }
+        });
+
+        return OrganizationMapper.toUpdateMember(organization);
+    }
 }

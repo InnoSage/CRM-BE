@@ -35,4 +35,8 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MemberStatus status;
 
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
+
 }

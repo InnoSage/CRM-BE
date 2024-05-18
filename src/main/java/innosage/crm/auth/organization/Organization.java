@@ -25,4 +25,8 @@ public class Organization extends BaseEntity {
 
     @OneToMany(mappedBy = "organization")
     private List<Member> members = new ArrayList<>();
+
+    public void updateMember(List<Member> members) {
+        this.members = members;
+    }
 }

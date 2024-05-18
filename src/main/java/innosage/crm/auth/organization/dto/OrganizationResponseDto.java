@@ -22,4 +22,12 @@ public class OrganizationResponseDto {
         private Long organizationId;
         private String organizationName;
     }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class updateMember {
+        private Long organizationId;
+    }
 }

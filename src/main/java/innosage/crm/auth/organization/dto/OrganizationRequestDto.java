@@ -13,7 +13,7 @@ public class OrganizationRequestDto {
     }
 
     @Getter
-    public static class manageOrganization {
+    public static class updateMember {
 
         private List<Long> memberIds;
     }
