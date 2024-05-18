@@ -14,6 +14,6 @@ public class ContentResponseDto {
         private Long attributeId;
         private String attributeName;
         private String dataType;
-        private String value;
+        private Object value;
     }
 }

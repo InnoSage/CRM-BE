@@ -8,6 +8,6 @@ public class ContentRequestDto {
     public static class addContent {
 
         private Long attributeId;
-        private String value;
+        private Object value;
     }
 }
