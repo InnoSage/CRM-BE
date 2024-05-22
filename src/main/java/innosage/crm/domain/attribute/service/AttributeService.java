@@ -9,6 +9,7 @@ import innosage.crm.domain.attribute.strategy.AttributeStrategy;
 import innosage.crm.domain.attribute.strategy.AttributeStrategyFactory;
 import innosage.crm.domain.sheet.Sheet;
 import innosage.crm.domain.sheet.service.SheetQueryAdapter;
+import innosage.crm.global.ApiClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ public class AttributeService {
     private final AttributeCommandAdapter attributeCommandAdapter;
     private final AttributeQueryAdapter attributeQueryAdapter;
     private final SheetQueryAdapter sheetQueryAdapter;
+    private final ApiClient apiClient;
 
     @Transactional
     public AttributeResponseDto.addAttribute addAttribute(Long sheetId, AttributeRequestDto.addAttribute request) {
@@ -36,6 +38,9 @@ public class AttributeService {
         if (strategy != null) {
             strategy.setData(attribute, request.getData());
         }
+
+        // 외부 서버로 요청 보내기
+        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
 
         return AttributeMapper.toAddAttribute(savedAttribute);
     }
@@ -51,6 +56,9 @@ public class AttributeService {
             strategy.setData(attribute, request.getData());
         }
 
+        Sheet sheet = attribute.getSheet();
+        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
+
         return AttributeMapper.toUpdateAttribute(attribute);
     }
 
@@ -64,6 +72,10 @@ public class AttributeService {
     @Transactional
     public void deleteAttribute(Long attributeId) {
         Attribute attribute = attributeQueryAdapter.findById(attributeId);
+
+        Sheet sheet = attribute.getSheet();
         attributeCommandAdapter.deleteAttribute(attribute);
+
+        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
     }
 }

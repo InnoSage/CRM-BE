@@ -38,3 +38,7 @@ jwt:
 naver:
   mail:
     password: ${NAVER_MAIL_PASSWORD}
+
+ai:
+  server:
+    url: ${AI_SERVER}
