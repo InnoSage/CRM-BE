@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("sheet/{sheetId}/deals")
+@RequestMapping("/sheet/{sheetId}/deals")
 @Tag(name = "deals")
 public class DealController {
 
@@ -41,5 +41,14 @@ public class DealController {
             @PathVariable Long sheetId,
             @PathVariable Long dealId) {
         return CommonResponse.onSuccess(dealService.getDeal(dealId));
+    }
+
+    @DeleteMapping("/{dealId}")
+    @Operation(summary = "거래 삭제 ✔\uFE0F \uD83D\uDD11", description = "특정 거래를 삭제합니다.")
+    public CommonResponse deleteDeal(
+            @PathVariable Long sheetId,
+            @PathVariable Long dealId) {
+        dealService.deleteDeal(dealId);
+        return CommonResponse.onSuccess(null);
     }
 }
