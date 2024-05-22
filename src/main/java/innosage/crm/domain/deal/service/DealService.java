@@ -42,4 +42,10 @@ public class DealService {
         Deal deal = dealQueryAdapter.findById(dealId);
         return DealMapper.toGetDeal(deal);
     }
+
+    @Transactional
+    public void deleteDeal(Long dealId) {
+        Deal deal = dealQueryAdapter.findById(dealId);
+        dealCommandAdapter.deleteDeal(deal);
+    }
 }
