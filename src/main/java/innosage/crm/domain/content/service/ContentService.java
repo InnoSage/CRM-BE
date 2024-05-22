@@ -7,6 +7,8 @@ import innosage.crm.domain.content.dto.ContentRequestDto;
 import innosage.crm.domain.content.mapper.ContentMapper;
 import innosage.crm.domain.deal.Deal;
 import innosage.crm.domain.deal.service.DealQueryAdapter;
+import innosage.crm.domain.sheet.Sheet;
+import innosage.crm.global.ApiClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,12 +23,17 @@ public class ContentService {
     private final ContentQueryAdapter contentQueryAdapter;
     private final DealQueryAdapter dealQueryAdapter;
     private final AttributeQueryAdapter attributeQueryAdapter;
+    private final ApiClient apiClient;
 
     @Transactional
     public void addContent(Long dealId, ContentRequestDto.addContent request) {
         Deal deal = dealQueryAdapter.findById(dealId);
         Attribute attribute = attributeQueryAdapter.findById(request.getAttributeId());
         Content content = ContentMapper.toContent(request.getValue(), attribute, deal);
+
+        Sheet sheet = attribute.getSheet();
+        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
+
         contentCommandAdapter.addContent(content);
     }
 

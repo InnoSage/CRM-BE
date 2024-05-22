@@ -6,6 +6,8 @@ import innosage.crm.domain.deal.Deal;
 import innosage.crm.domain.deal.dto.DealRequestDto;
 import innosage.crm.domain.deal.dto.DealResponseDto;
 import innosage.crm.domain.deal.mapper.DealMapper;
+import innosage.crm.domain.sheet.Sheet;
+import innosage.crm.global.ApiClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,12 +22,16 @@ public class DealService {
     private final DealCommandAdapter dealCommandAdapter;
     private final DealQueryAdapter dealQueryAdapter;
     private final CompanyQueryAdapter companyQueryAdapter;
+    private final ApiClient apiClient;
 
     @Transactional
     public DealResponseDto.addDeal addDeal(DealRequestDto.addDeal request) {
         Company company = companyQueryAdapter.findById(request.getCompanyId());
         Deal deal = DealMapper.toDeal(company);
         Deal savedDeal = dealCommandAdapter.addDeal(deal);
+
+        Sheet sheet = company.getSheet();
+        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
 
         return DealMapper.toAddDeal(savedDeal);
     }
@@ -35,6 +41,9 @@ public class DealService {
         Company newCompany = companyQueryAdapter.findById(request.getCompanyId());
         Deal deal = dealQueryAdapter.findById(dealId);
         deal.changeCompany(newCompany);
+
+        Sheet sheet = newCompany.getSheet();
+        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
     }
 
     @Transactional(readOnly = true)
@@ -47,5 +56,8 @@ public class DealService {
     public void deleteDeal(Long dealId) {
         Deal deal = dealQueryAdapter.findById(dealId);
         dealCommandAdapter.deleteDeal(deal);
+
+        Sheet sheet = deal.getCompany().getSheet();
+        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
     }
 }

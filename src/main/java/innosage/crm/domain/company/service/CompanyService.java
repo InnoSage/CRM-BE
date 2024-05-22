@@ -6,6 +6,7 @@ import innosage.crm.domain.company.dto.CompanyResponseDto;
 import innosage.crm.domain.company.mapper.CompanyMapper;
 import innosage.crm.domain.sheet.Sheet;
 import innosage.crm.domain.sheet.service.SheetQueryAdapter;
+import innosage.crm.global.ApiClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,15 @@ public class CompanyService {
     private final CompanyCommandAdapter companyCommandAdapter;
     private final CompanyQueryAdapter companyQueryAdapter;
     private final SheetQueryAdapter sheetQueryAdapter;
+    private final ApiClient apiClient;
 
     @Transactional
     public CompanyResponseDto.addCompany addCompany(Long sheetId, CompanyRequestDto.addCompany request) {
         Sheet sheet = sheetQueryAdapter.findById(sheetId);
         Company company = CompanyMapper.toCompany(sheet, request.getCompanyName());
         Company savedCompany = companyCommandAdapter.addCompany(company);
+
+        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
 
         return CompanyMapper.toAddCompany(savedCompany);
     }
@@ -44,5 +48,7 @@ public class CompanyService {
         Sheet sheet = sheetQueryAdapter.findById(sheetId);
         Company company = companyQueryAdapter.findByIdAndSheet(companyId, sheet);
         companyCommandAdapter.delete(company);
+
+        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
     }
 }
