@@ -51,4 +51,13 @@ public class SheetResponseDto {
         private List<AttributeResponseDto.getAttribute> attributes;
         private List<DealResponseDto.getDeal> deals;
     }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class updateSheet {
+
+        private Long sheetId;
+    }
 }

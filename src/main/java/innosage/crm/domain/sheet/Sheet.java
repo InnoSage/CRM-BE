@@ -30,4 +30,8 @@ public class Sheet {
     @ManyToOne
     @JoinColumn(name = "organization_id")
     private Organization organization;
+
+    public void update(String name) {
+        this.name = name;
+    }
 }

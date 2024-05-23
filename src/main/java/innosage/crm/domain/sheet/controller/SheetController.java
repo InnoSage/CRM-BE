@@ -41,4 +41,14 @@ public class SheetController {
             @PathVariable Long sheetId) {
         return CommonResponse.onSuccess(sheetService.getSheet(sheetId));
     }
+
+    @PutMapping("/{sheetId}/name")
+    @Operation(summary = "시트 이름 수정 ✔\uFE0F \uD83D\uDD11", description = "시트 이름을 수정합니다.")
+    public CommonResponse<SheetResponseDto.updateSheet> updateSheet(
+            @PathVariable Long organizationId,
+            @PathVariable Long sheetId,
+            @RequestBody SheetRequestDto.updateSheet request
+    ) {
+        return CommonResponse.onSuccess(sheetService.updateSheet(sheetId, request));
+    }
 }

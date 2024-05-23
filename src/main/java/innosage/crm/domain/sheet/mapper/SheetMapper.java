@@ -61,4 +61,10 @@ public class SheetMapper {
                 .deals(deals)
                 .build();
     }
+
+    public static SheetResponseDto.updateSheet toUpdateSheet(Sheet sheet) {
+        return SheetResponseDto.updateSheet.builder()
+                .sheetId(sheet.getId())
+                .build();
+    }
 }

@@ -64,6 +64,14 @@ public class SheetService {
 
         return SheetMapper.toGetSheetDetails(sheet, allAttributes, allDeals, companies);
     }
+
+    @Transactional
+    public SheetResponseDto.updateSheet updateSheet(Long sheetId, SheetRequestDto.updateSheet request) {
+        Sheet sheet = sheetQueryAdapter.findById(sheetId);
+        sheet.update(request.getName());
+
+        return SheetMapper.toUpdateSheet(sheet);
+    }
 }
 
 
