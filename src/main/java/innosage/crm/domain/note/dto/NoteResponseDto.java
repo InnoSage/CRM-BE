@@ -32,7 +32,8 @@ public class NoteResponseDto {
     @AllArgsConstructor
     public static class getNotes {
 
-        private List<NoteResponseDto.getNote> notes;
+        private Long noteId;
+        private String title;
     }
 
     @Builder

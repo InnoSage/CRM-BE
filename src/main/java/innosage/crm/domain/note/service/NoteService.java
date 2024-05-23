@@ -44,11 +44,11 @@ public class NoteService {
     }
 
     @Transactional(readOnly = true)
-    public NoteResponseDto.getNotes getNotes(Long dealId) {
+    public List<NoteResponseDto.getNotes> getNotes(Long dealId) {
         Deal deal = dealQueryAdapter.findById(dealId);
         List<Note> notes = deal.getNotes();
 
-        return NoteMapper.toGetNotes(notes);
+        return NoteMapper.toGetNoteList(notes);
     }
 
     @Transactional
