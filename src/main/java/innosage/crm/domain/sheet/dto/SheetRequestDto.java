@@ -9,4 +9,10 @@ public class SheetRequestDto {
 
         private String name;
     }
+
+    @Getter
+    public static class updateSheet {
+
+        private String name;
+    }
 }
