@@ -37,13 +37,17 @@ public class NoteMapper {
                 .build();
     }
 
-    public static NoteResponseDto.getNotes toGetNotes(List<Note> notes) {
+    public static NoteResponseDto.getNotes toGetNotes(Note note) {
         return NoteResponseDto.getNotes.builder()
-                .notes(notes.stream()
-                            .map(NoteMapper::toGetNote)
-                            .collect(Collectors.toList())
-                )
+                .noteId(note.getId())
+                .title(note.getTitle())
                 .build();
+    }
+
+    public static List<NoteResponseDto.getNotes> toGetNoteList(List<Note> notes) {
+        return notes.stream()
+                            .map(NoteMapper::toGetNotes)
+                            .collect(Collectors.toList());
     }
 
     public static NoteResponseDto.updateNote toUpdateNote(Note note) {

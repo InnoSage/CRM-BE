@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/deals/{dealId}/notes")
@@ -32,7 +34,7 @@ public class NoteController {
     }
 
     @GetMapping
-    public CommonResponse<NoteResponseDto.getNotes> getNotes(
+    public CommonResponse<List<NoteResponseDto.getNotes>> getNotes(
             @PathVariable Long dealId) {
         return CommonResponse.onSuccess(noteService.getNotes(dealId));
     }
