@@ -35,4 +35,14 @@ public class ContentController {
             @RequestBody ContentRequestDto.updateContent request) {
         return CommonResponse.onSuccess(contentService.updateContent(contentId, request));
     }
+
+    @DeleteMapping("/sheet/{sheetId}/deals/{dealId}/contents/{contentId}")
+    @Operation(summary = "속성값 삭제 ✔\uFE0F \uD83D\uDD11", description = "특정 속성값을 삭제합니다.")
+    public CommonResponse deleteContent(
+            @PathVariable Long sheetId,
+            @PathVariable Long dealId,
+            @PathVariable Long contentId) {
+        contentService.deleteContent(contentId);
+        return CommonResponse.onSuccess(null);
+    }
 }

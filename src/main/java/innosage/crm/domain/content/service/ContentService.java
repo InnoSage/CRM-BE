@@ -31,21 +31,33 @@ public class ContentService {
         Deal deal = dealQueryAdapter.findById(dealId);
         Attribute attribute = attributeQueryAdapter.findById(request.getAttributeId());
         Content content = ContentMapper.toContent(request.getValue(), attribute, deal);
+        Content savedContent = contentCommandAdapter.addContent(content);
 
         Sheet sheet = attribute.getSheet();
         apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
 
-        Content savedContent = contentCommandAdapter.addContent(content);
         return ContentMapper.toAddContent(savedContent);
     }
 
     @Transactional
     public ContentResponseDto.updateContent updateContent(Long contentId, ContentRequestDto.updateContent request) {
         Content content = contentQueryAdapter.findById(contentId);
+        Attribute attribute = attributeQueryAdapter.findById(request.getAttributeId());
+        Sheet sheet = attribute.getSheet();
 
         content.updateValue(request.getValue());
+        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
 
         return ContentMapper.toUpdateContent(content);
     }
 
+    @Transactional
+    public void deleteContent(Long contentId) {
+        Content content = contentQueryAdapter.findById(contentId);
+        Attribute attribute = content.getAttribute();
+        Sheet sheet = attribute.getSheet();
+
+        contentCommandAdapter.deleteContent(content);
+        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
+    }
 }
