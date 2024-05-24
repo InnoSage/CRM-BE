@@ -27,6 +27,12 @@ public class ContentMapper {
                 .build();
     }
 
+    public static ContentResponseDto.addContent toAddContent(Content content) {
+        return ContentResponseDto.addContent.builder()
+                .contentId(content.getId())
+                .build();
+    }
+
     private static Object convertValueByType(Object value, AttributeType type) {
         switch (type) {
             case NUMBER:
@@ -101,5 +107,11 @@ public class ContentMapper {
         return contents.stream()
                 .map(ContentMapper::toGetContent)
                 .collect(Collectors.toList());
+    }
+
+    public static ContentResponseDto.updateContent toUpdateContent(Content content) {
+        return ContentResponseDto.updateContent.builder()
+                .updatedContentId(content.getId())
+                .build();
     }
 }
