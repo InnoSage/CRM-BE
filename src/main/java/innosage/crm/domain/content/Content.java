@@ -28,4 +28,8 @@ public class Content extends BaseEntity {
     @JoinColumn(name = "attribute_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Attribute attribute;
+
+    public void updateValue(Object value) {
+        this.value = value;
+    }
 }

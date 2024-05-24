@@ -48,6 +48,10 @@ public enum GlobalErrorCode implements BaseErrorCode {
     // 404 Not Found - 찾을 수 없음
     DEAL_NOT_FOUND(NOT_FOUND, "DEAL404_1", "거래를 찾을 수 없습니다."),
 
+    //Content
+    // 404 Not Found - 찾을 수 없음
+    CONTENT_NOT_FOUND(NOT_FOUND, "CONTENT404_1", "컨텐츠를 찾을 수 없습니다."),
+
     //Attribute
     // 404 Not Found - 찾을 수 없음
     ATTRIBUTE_NOT_FOUND(NOT_FOUND, "ATTRIBUTE404_1", "속성을 찾을 수 없습니다."),

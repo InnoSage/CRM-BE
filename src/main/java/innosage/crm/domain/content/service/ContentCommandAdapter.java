@@ -13,8 +13,8 @@ public class ContentCommandAdapter {
 
     private final ContentRepository contentRepository;
 
-    public void addContent(Content content) {
-        contentRepository.save(content);
+    public Content addContent(Content content) {
+        return contentRepository.save(content);
     }
 
     public void deleteContent(Content content) {

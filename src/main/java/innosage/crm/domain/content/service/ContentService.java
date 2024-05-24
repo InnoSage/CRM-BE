@@ -4,6 +4,7 @@ import innosage.crm.domain.attribute.Attribute;
 import innosage.crm.domain.attribute.service.AttributeQueryAdapter;
 import innosage.crm.domain.content.Content;
 import innosage.crm.domain.content.dto.ContentRequestDto;
+import innosage.crm.domain.content.dto.ContentResponseDto;
 import innosage.crm.domain.content.mapper.ContentMapper;
 import innosage.crm.domain.deal.Deal;
 import innosage.crm.domain.deal.service.DealQueryAdapter;
@@ -26,17 +27,37 @@ public class ContentService {
     private final ApiClient apiClient;
 
     @Transactional
-    public void addContent(Long dealId, ContentRequestDto.addContent request) {
+    public ContentResponseDto.addContent addContent(Long dealId, ContentRequestDto.addContent request) {
         Deal deal = dealQueryAdapter.findById(dealId);
         Attribute attribute = attributeQueryAdapter.findById(request.getAttributeId());
         Content content = ContentMapper.toContent(request.getValue(), attribute, deal);
+        Content savedContent = contentCommandAdapter.addContent(content);
 
         Sheet sheet = attribute.getSheet();
         apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
 
-        contentCommandAdapter.addContent(content);
+        return ContentMapper.toAddContent(savedContent);
     }
 
+    @Transactional
+    public ContentResponseDto.updateContent updateContent(Long contentId, ContentRequestDto.updateContent request) {
+        Content content = contentQueryAdapter.findById(contentId);
+        Attribute attribute = attributeQueryAdapter.findById(request.getAttributeId());
+        Sheet sheet = attribute.getSheet();
 
+        content.updateValue(request.getValue());
+        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
 
+        return ContentMapper.toUpdateContent(content);
+    }
+
+    @Transactional
+    public void deleteContent(Long contentId) {
+        Content content = contentQueryAdapter.findById(contentId);
+        Attribute attribute = content.getAttribute();
+        Sheet sheet = attribute.getSheet();
+
+        contentCommandAdapter.deleteContent(content);
+        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
+    }
 }
