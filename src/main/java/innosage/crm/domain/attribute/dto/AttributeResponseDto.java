@@ -13,6 +13,7 @@ public class AttributeResponseDto {
     @AllArgsConstructor
     public static class addAttribute {
 
+        private Long attributeId;
         private String dataType;
         private String name;
         private String description;

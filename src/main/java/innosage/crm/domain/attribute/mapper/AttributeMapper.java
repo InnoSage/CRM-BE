@@ -27,6 +27,7 @@ public class AttributeMapper {
 
     public static AttributeResponseDto.addAttribute toAddAttribute(Attribute attribute) {
         return AttributeResponseDto.addAttribute.builder()
+                .attributeId(attribute.getId())
                 .name(attribute.getName())
                 .dataType(attribute.getType().name())
                 .description(attribute.getDescription())
