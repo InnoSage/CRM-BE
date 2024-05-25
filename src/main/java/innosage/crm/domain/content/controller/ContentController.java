@@ -26,23 +26,22 @@ public class ContentController {
         return CommonResponse.onSuccess(contentService.addContent(dealId, request));
     }
 
-    @PatchMapping("/sheet/{sheetId}/deals/{dealId}/contents/{contentId}")
+    @PatchMapping("/sheet/{sheetId}/deals/{dealId}/contents")
     @Operation(summary = "속성값 변경 ✔\uFE0F \uD83D\uDD11", description = "특정 속성값을 변경합니다.")
     public CommonResponse<ContentResponseDto.updateContent> updateContent(
             @PathVariable Long sheetId,
             @PathVariable Long dealId,
-            @PathVariable Long contentId,
             @RequestBody ContentRequestDto.updateContent request) {
-        return CommonResponse.onSuccess(contentService.updateContent(contentId, request));
+        return CommonResponse.onSuccess(contentService.updateContent(dealId, request));
     }
 
-    @DeleteMapping("/sheet/{sheetId}/deals/{dealId}/contents/{contentId}")
+    @DeleteMapping("/sheet/{sheetId}/deals/{dealId}/contents")
     @Operation(summary = "속성값 삭제 ✔\uFE0F \uD83D\uDD11", description = "특정 속성값을 삭제합니다.")
     public CommonResponse deleteContent(
             @PathVariable Long sheetId,
             @PathVariable Long dealId,
-            @PathVariable Long contentId) {
-        contentService.deleteContent(contentId);
+            @RequestBody ContentRequestDto.deleteContent request) {
+        contentService.deleteContent(dealId, request);
         return CommonResponse.onSuccess(null);
     }
 }
