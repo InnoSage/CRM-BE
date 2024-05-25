@@ -17,4 +17,10 @@ public class ContentRequestDto {
         private Long attributeId;
         private Object value;
     }
+
+    @Getter
+    public static class deleteContent {
+
+        private Long attributeId;
+    }
 }

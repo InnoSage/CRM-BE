@@ -40,9 +40,12 @@ public class ContentService {
     }
 
     @Transactional
-    public ContentResponseDto.updateContent updateContent(Long contentId, ContentRequestDto.updateContent request) {
-        Content content = contentQueryAdapter.findById(contentId);
+    public ContentResponseDto.updateContent updateContent(Long dealId, ContentRequestDto.updateContent request) {
+
         Attribute attribute = attributeQueryAdapter.findById(request.getAttributeId());
+        Deal deal = dealQueryAdapter.findById(dealId);
+        Content content = contentQueryAdapter.findByAttributeAndDeal(attribute, deal);
+
         Sheet sheet = attribute.getSheet();
 
         content.updateValue(request.getValue());
@@ -52,9 +55,12 @@ public class ContentService {
     }
 
     @Transactional
-    public void deleteContent(Long contentId) {
-        Content content = contentQueryAdapter.findById(contentId);
-        Attribute attribute = content.getAttribute();
+    public void deleteContent(Long dealId, ContentRequestDto.deleteContent request) {
+
+        Attribute attribute = attributeQueryAdapter.findById(request.getAttributeId());
+        Deal deal = dealQueryAdapter.findById(dealId);
+        Content content = contentQueryAdapter.findByAttributeAndDeal(attribute, deal);
+
         Sheet sheet = attribute.getSheet();
 
         contentCommandAdapter.deleteContent(content);
