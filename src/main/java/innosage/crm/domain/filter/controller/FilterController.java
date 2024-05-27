@@ -25,4 +25,13 @@ public class FilterController {
         return CommonResponse.onSuccess(filterService.addFilter(sheetId, request));
     }
 
+    @DeleteMapping("/filter/{filterId}")
+    @Operation(summary = "필터 삭제 ✔\uFE0F \uD83D\uDD11", description = "필터를 삭제합니다.")
+    public CommonResponse deleteFilter(
+            @PathVariable Long sheetId,
+            @PathVariable Long filterId) {
+        filterService.deleteFilter(filterId);
+        return CommonResponse.onSuccess(null);
+    }
+
 }

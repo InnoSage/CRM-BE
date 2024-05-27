@@ -32,4 +32,10 @@ public class FilterService {
 
             return FilterMapper.toAddFilter(savedFilter);
         }
+
+        @Transactional
+        public void deleteFilter(Long filterId) {
+            Filter filter = filterQueryAdapter.findById(filterId);
+            filterCommandAdapter.deleteFilter(filter);
+        }
 }

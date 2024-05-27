@@ -16,4 +16,8 @@ public class FilterCommandAdapter {
     public Filter addFilter(Filter filter) {
         return filterRepository.save(filter);
     }
+
+    public void deleteFilter(Filter filter) {
+        filterRepository.delete(filter);
+    }
 }
