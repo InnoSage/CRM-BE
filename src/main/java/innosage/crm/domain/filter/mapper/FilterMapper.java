@@ -30,6 +30,7 @@ public class FilterMapper {
 
     public static FilterResponseDto.getFilter toGetFilter(Filter filter) {
         return FilterResponseDto.getFilter.builder()
+                .filterId(filter.getId())
                 .targetAttributeId(filter.getTargetAttribute().getId())
                 .keyword(filter.getKeyword())
                 .filterType(filter.getFilterType().name())

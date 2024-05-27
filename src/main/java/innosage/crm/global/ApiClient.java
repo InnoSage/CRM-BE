@@ -2,6 +2,7 @@ package innosage.crm.global;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -23,7 +24,8 @@ public class ApiClient {
     public void sendGetRequest(Long organizationId, Long sheetId) {
         String url = String.format(BASE_URL + "/%d/%d", organizationId, sheetId);
         System.out.println("url = " + url);
-        restTemplate.getForObject(url, Void.class);
+        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+        System.out.println("Response: " + response.getBody());
     }
 
     public void sendDeleteRequest(Long organizationId, Long sheetId) {

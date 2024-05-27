@@ -20,6 +20,7 @@ public class FilterResponseDto {
     @AllArgsConstructor
     public static class getFilter {
 
+        private Long filterId;
         private Long targetAttributeId;
         private String keyword;
         private String filterType;
