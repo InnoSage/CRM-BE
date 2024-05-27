@@ -22,15 +22,12 @@ public class CompanyService {
     private final CompanyCommandAdapter companyCommandAdapter;
     private final CompanyQueryAdapter companyQueryAdapter;
     private final SheetQueryAdapter sheetQueryAdapter;
-    private final ApiClient apiClient;
 
     @Transactional
     public CompanyResponseDto.addCompany addCompany(Long sheetId, CompanyRequestDto.addCompany request) {
         Sheet sheet = sheetQueryAdapter.findById(sheetId);
         Company company = CompanyMapper.toCompany(sheet, request.getCompanyName());
         Company savedCompany = companyCommandAdapter.addCompany(company);
-
-        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
 
         return CompanyMapper.toAddCompany(savedCompany);
     }
@@ -47,8 +44,7 @@ public class CompanyService {
     public void deleteCompany(Long sheetId, Long companyId) {
         Sheet sheet = sheetQueryAdapter.findById(sheetId);
         Company company = companyQueryAdapter.findByIdAndSheet(companyId, sheet);
-        companyCommandAdapter.delete(company);
 
-        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
+        companyCommandAdapter.delete(company);
     }
 }

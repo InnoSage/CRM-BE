@@ -22,16 +22,12 @@ public class DealService {
     private final DealCommandAdapter dealCommandAdapter;
     private final DealQueryAdapter dealQueryAdapter;
     private final CompanyQueryAdapter companyQueryAdapter;
-    private final ApiClient apiClient;
 
     @Transactional
     public DealResponseDto.addDeal addDeal(DealRequestDto.addDeal request) {
         Company company = companyQueryAdapter.findById(request.getCompanyId());
         Deal deal = DealMapper.toDeal(company);
         Deal savedDeal = dealCommandAdapter.addDeal(deal);
-
-        Sheet sheet = company.getSheet();
-        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
 
         return DealMapper.toAddDeal(savedDeal);
     }
@@ -40,10 +36,8 @@ public class DealService {
     public void changeCompany(Long dealId, DealRequestDto.changeCompany request) {
         Company newCompany = companyQueryAdapter.findById(request.getCompanyId());
         Deal deal = dealQueryAdapter.findById(dealId);
-        deal.changeCompany(newCompany);
 
-        Sheet sheet = newCompany.getSheet();
-        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
+        deal.changeCompany(newCompany);
     }
 
     @Transactional(readOnly = true)
@@ -55,9 +49,7 @@ public class DealService {
     @Transactional
     public void deleteDeal(Long dealId) {
         Deal deal = dealQueryAdapter.findById(dealId);
-        dealCommandAdapter.deleteDeal(deal);
 
-        Sheet sheet = deal.getCompany().getSheet();
-        apiClient.sendGetRequest(sheet.getOrganization().getId(), sheet.getId());
+        dealCommandAdapter.deleteDeal(deal);
     }
 }
