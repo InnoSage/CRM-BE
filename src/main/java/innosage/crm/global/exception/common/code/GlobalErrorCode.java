@@ -71,6 +71,10 @@ public enum GlobalErrorCode implements BaseErrorCode {
     // Option
     // 404 Not Found - 찾을 수 없음
     OPTION_NOT_FOUND(NOT_FOUND, "OPTION404_1", "옵션을 찾을 수 없습니다."),
+
+    // Filter
+    // 404 Not Found - 찾을 수 없음
+    FILTER_NOT_FOUND(NOT_FOUND, "FILTER404_1", "필터를 찾을 수 없습니다.")
     ;
 
     private final HttpStatus httpStatus;
