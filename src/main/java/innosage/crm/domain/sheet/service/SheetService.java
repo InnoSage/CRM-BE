@@ -72,6 +72,12 @@ public class SheetService {
 
         return SheetMapper.toUpdateSheet(sheet);
     }
+
+    @Transactional
+    public void deleteSheet(Long sheetId) {
+        Sheet sheet = sheetQueryAdapter.findById(sheetId);
+        sheetCommandAdapter.deleteSheet(sheet);
+    }
 }
 
 

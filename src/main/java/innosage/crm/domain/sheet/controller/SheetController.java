@@ -51,4 +51,14 @@ public class SheetController {
     ) {
         return CommonResponse.onSuccess(sheetService.updateSheet(sheetId, request));
     }
+
+    @DeleteMapping("/{sheetId}")
+    @Operation(summary = "시트 삭제 ✔\uFE0F \uD83D\uDD11", description = "시트를 삭제합니다.")
+    public CommonResponse deleteSheet(
+            @PathVariable Long organizationId,
+            @PathVariable Long sheetId
+    ) {
+        sheetService.deleteSheet(sheetId);
+        return CommonResponse.onSuccess(null);
+    }
 }

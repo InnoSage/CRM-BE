@@ -2,6 +2,7 @@ package innosage.crm.domain.sheet;
 
 import innosage.crm.auth.organization.Organization;
 import innosage.crm.domain.attribute.Attribute;
+import innosage.crm.domain.company.Company;
 import innosage.crm.domain.filter.Filter;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,6 +27,9 @@ public class Sheet {
 
     @OneToMany(mappedBy = "sheet", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Filter> filters;
+
+    @OneToMany(mappedBy = "sheet", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Company> companies;
 
     @ManyToOne
     @JoinColumn(name = "organization_id")
