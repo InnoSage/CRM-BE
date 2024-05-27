@@ -16,4 +16,8 @@ public class SheetCommandAdapter {
     public void addSheet(Sheet sheet) {
         sheetRepository.save(sheet);
     }
+
+    public void deleteSheet(Sheet sheet) {
+        sheetRepository.delete(sheet);
+    }
 }
