@@ -33,7 +33,7 @@ public class ContentMapper {
                 .build();
     }
 
-    private static Object convertValueByType(Object value, AttributeType type) {
+    public static Object convertValueByType(Object value, AttributeType type) {
         switch (type) {
             case NUMBER:
             case CURRENCY:

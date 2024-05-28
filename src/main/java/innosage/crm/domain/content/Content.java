@@ -2,6 +2,7 @@ package innosage.crm.domain.content;
 
 import innosage.crm.domain.attribute.Attribute;
 import innosage.crm.domain.content.mapper.AttributeTypeConverter;
+import innosage.crm.domain.content.mapper.ContentMapper;
 import innosage.crm.domain.deal.Deal;
 import innosage.crm.global.common.BaseEntity;
 import jakarta.persistence.*;
@@ -30,6 +31,6 @@ public class Content extends BaseEntity {
     private Attribute attribute;
 
     public void updateValue(Object value) {
-        this.value = value;
+        this.value = ContentMapper.convertValueByType(value, this.attribute.getType());
     }
 }

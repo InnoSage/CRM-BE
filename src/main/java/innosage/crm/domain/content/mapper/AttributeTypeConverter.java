@@ -10,17 +10,9 @@ import jakarta.persistence.Converter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import jakarta.persistence.AttributeConverter;
-import jakarta.persistence.Converter;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
+
 
 @Converter
 public class AttributeTypeConverter implements AttributeConverter<Object, String> {
